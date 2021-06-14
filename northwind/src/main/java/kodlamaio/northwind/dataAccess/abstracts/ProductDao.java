@@ -10,6 +10,8 @@ import kodlamaio.northwind.entities.dtos.ProductWithCategoryDto;
 
 public interface ProductDao extends JpaRepository<Product, Integer> {
 
+	Product getById(int id);
+
 	Product getByProductName(String productName);
 
 	Product getByProductNameAndCategory_CategoryId(String productName, int categoryId);
@@ -26,8 +28,7 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
 	List<Product> getByNameAndCategory(String productName, int categoryId);
 
 	@Query("Select new kodlamaio.northwind.entities.dtos.ProductWithCategoryDto"
-			+ "(p.id, p.productName, c.categoryName) " 
-			+ "From Category c Inner Join c.products p")
+			+ "(p.id, p.productName, c.categoryName) " + "From Category c Inner Join c.products p")
 	List<ProductWithCategoryDto> getproductWithCategoryDtos();
 
 }

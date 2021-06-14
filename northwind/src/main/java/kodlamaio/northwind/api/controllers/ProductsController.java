@@ -30,15 +30,21 @@ public class ProductsController {
 		this.productService = productService;
 	}
 
+	@PostMapping("/add")
+	public Result add(@RequestBody Product product) {
+		return this.productService.add(product);
+	}
+
+	@GetMapping("/getById")
+	public DataResult<Product> getById(@RequestParam("id") int id) {
+		return this.productService.getById(id);
+
+	}
+
 	@GetMapping("/getall")
 	public DataResult<List<Product>> getAll() {
 		return this.productService.getAll();
 
-	}
-
-	@PostMapping("/add")
-	public Result add(@RequestBody Product product) {
-		return this.productService.add(product);
 	}
 
 	@GetMapping("/getByProductName")
@@ -72,6 +78,7 @@ public class ProductsController {
 	public DataResult<List<Product>> getByProductNameStartsWith(@RequestParam String productName) {
 		return this.productService.getByProductNameStartsWith(productName);
 	}
+
 	@GetMapping("/getByNameAndCategory")
 	public DataResult<List<Product>> getByNameAndCategory(@RequestParam("productName") String productName,
 			@RequestParam("categoryId") int categoryId) {
